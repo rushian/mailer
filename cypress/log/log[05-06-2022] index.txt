@@ -1,0 +1,28 @@
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:15:40] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:15:42]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:23:27] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:23:29]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:26:14] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:26:16]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:31:15] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:31:17]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:34:04] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:34:05]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:36:47] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:36:49]  passou na conexao - Server is ready to take our messages 
+
+[05/06/2022] Criou transporte - HOST: smtp.gmail.com PORT: 587 USER luciano.testesqa@gmail.com FROM Luciano <luciano.testesqa@gmail.com> 
+[05/06/2022 17:37:12] luciano.ivec@gmail.com,jef_shandler@msn.com,rufusQA@pm.me,luciano.testesqa@gmail.com - destinatarios 
+[05/06/2022 17:37:13]  passou na conexao - Server is ready to take our messages 
