@@ -1,132 +1,169 @@
+/// <reference types="cypress" />
 const { defineConfig } = require('cypress')
+let allResults 
+let num_specs 
+
+var variavel = {
+  valor: 0,
+  get int() { // define o get integer
+    return this.valor;
+  },  
+  set int(i) {  // define o set
+  	this.valor = i;
+  }
+}
 
 module.exports = defineConfig({
-
   e2e: {
     specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
 
-      const envia_emails = function () {
-        const fs = require("fs")
-        const nodemailer = require("nodemailer")
-        var hoje = new Date().toLocaleDateString()
-        var nomeArquivo = "cypress/log/log[" + hoje.replace(/\//g,  "-") + "] index.txt";
-
-        // create reusable transporter object using the default SMTP transport
-        let transport = nodemailer.createTransport(
-          {
-            host: config.env.HOST,
-            port: Number(config.env.PORT),
-            secure: false, // true for 465, false for other ports
-            auth: {
-              user: config.env.USER, // generated ethereal user
-              pass: config.env.PASSWORD, // generated ethereal password
-            },
-            logger: true,
-            transactionLog: true
-          },
-          {
-            from: config.env.FROM
-          }
-        )
-    
-        var data = "\n[" + hoje +  "] Criou transporte - HOST: " + config.env.HOST + " PORT: " +  config.env.PORT +
-        " USER " + config.env.USER +" FROM " + config.env.FROM +" \n";
-        fs.appendFile(nomeArquivo, data, (err) => {});
-    
-        transport.verify(function (error, success) {
-          if (error) {
-            var hoje = new Date().toLocaleString();
-            var data = "[" + hoje + "] nao passou na conexao - erro \n";
-            fs.appendFile(nomeArquivo, data, (err) => {});
-          } else {
-            var hoje = new Date().toLocaleString();
-            var data ="[" + hoje + "]  passou na conexao - Server is ready to take our messages \n";
-            fs.appendFile(nomeArquivo, data, (err) => {});
-          }
-        });
-        var hoje = new Date().toLocaleString();
-        let message = {
-          // Comma separated list of recipients
-          to: config.env.EMAIL_TO,
-    
-          // Assunto da mensagem
-          subject: "[" + hoje + "] TESTE QA - envio de email",
-    
-          // plaintext body
-          text: "Hello to myself!",
-    
-          // HTML body
-          html:
-            "<p><b>Ol&aacute;</b>, voc&ecirc; est&aacute; recebendo este email porque funcionou!!" +
-            "<img src='/imgs/favicon-color.png'/></p>"  +
-            "<p>Here's a nyan cat for you as an embedded attachment:<br/>" +
-            "<img src='../../src/assets/chip.png'/></p>",
-          
-          list: {
-            // List-Help: <mailto:admin@example.com?subject=help>
-            help: "admin@example.com?subject=help",
-    
-            // List-Unsubscribe: <http://example.com> (Comment)
-            unsubscribe: [
-              {
-                url: "http://example.com/unsubscribe",
-                comment: "A short note about this url",
+      envia_emails = function (hoje) {
+          console.log("======================= ENTROU NA ENVIA-EMAILS  ============================")
+          //instanciar nodemailer
+          var nodemailer = require("nodemailer")
+          // criar objeto de transporte reutilizavel usando o transport SMTP default
+          // quando há autenticacao de 2 fatores no email a pagina https://myaccount.google.com/apppasswords
+          // permite configurar o token de acesso gmail com 16 digitos
+          var transport = nodemailer.createTransport(
+            {
+              host: config.env.HOST,
+              port: Number(config.env.PORT),
+              secure: false, // true for 465, false for other ports
+              auth: {
+                user: config.env.USER, 
+                pass: config.env.PASSWORD
               },
-              "unsubscribe@example.com",
-            ],
-    
-            // List-ID: "comment" <example.com>
-            id: {
-              url: "mylist.example.com",
-              comment: "This is my awesome list",
+              logger: true,
+              transactionLog: true
             }
+          )
+          
+          function dashes(s) {
+            return '-'.repeat(s.length)
           }
+        
+          function getStatusEmoji(status) {
+            console.log('========= STATUS ==========\n' + status)
+          
+            // https://glebbahmutov.com/blog/cypress-test-statuses/
+            const validStatuses = ['passed', 'failed', 'pending', 'skipped']
+            if (!validStatuses.includes(status)) {
+
+              throw new Error('Invalid status: "${status}"')
+            }
+          
+            const emoji = {
+              passed: '✅',
+              failed: '❌',
+              pending: '⌛',
+              skipped: '⚠️',
+            }
+            return emoji[status]
+          }
+          
+          
+          variavel.int = Object.keys(allResults).length
+
+          var testResults = Object.keys(allResults).map(spec => {
+            var specResults = allResults[spec]
+            
+            return (
+              spec +  '<br>' + dashes(spec) + '<br>' 
+              + Object.keys(specResults).map((testName) => {
+                  var testStatus = specResults[testName]
+                  var testCharacter = getStatusEmoji(testStatus)
+                  return testCharacter  + ' ' + testName
+                }).join('<br>')
+            )
+          }).join('<br>')
+          
+          let message = {
+            //remetente Nome <email>
+            from: config.env.FROM,
+            // lista de destinatarios separa por virgula
+            to: config.env.EMAIL_TO,
+            // Assunto da mensagem
+            subject: "[" + hoje + "]("+num_specs+") Relatorio de Resultados",
+
+            // a escolha de qual corpo será utilizado, depende da configuração do email
+            // corpo do email em plaintext 
+            text: 'Texto puro:\n\n' + testResults + '\n' ,
+            // corpo do email em HTML 
+            html:
+              "<p><b>Resultados dos Testes</b> - Executados em " + hoje +
+              "<br><img src='cid:teste'></p>"   +
+              "<p>Resultados por arquivo de testes:</p>" +  
+              "<br>" + testResults + "<br>"
+            ,
+            attachment: [{
+              filename: 'favicon-color.png',
+              path:    '../public/imgs/favicon-color.png',
+              cid: 'teste'
+            }]
+          
+          }
+
+          transport.sendMail(message, (erro, info) => {
+
+            console.log('========= ENTROU NO TRANSPORT.SENDMAIL ==========\n' + info)
+            if (erro) {
+              console.log("================= ERRO AO ENVIAR EMAIL ====================\n" + erro)
+              return process.exit(1)
+            } else {
+              console.log("================= ENVIO SEM ERROS ====================")
+            }
+            transport.close()
+          })
         }
-        var hoje = new Date().toLocaleString();
-        var data = "[" + hoje + "] " + message.to + " - destinatarios \n";
-        fs.appendFile(nomeArquivo, data, (err) => {});
-    
-        transport.sendMail(message, (error, info) => {
-          if (error) {
-            var hoje = new Date().toLocaleString()
-            var data = "\n[" + hoje + "]  ocorreu erro " + error.message + " \n"
-            fs.appendFile(nomeArquivo, data, (err) => {})
-            return process.exit(1)
-          }
-    
-          transport.close()
+      /*
+        os comandos before:run; after:spec e after:run sao acessados ao utilizar cypress run para rodar os teste;
+        conforme explicado em https://docs.cypress.io/api/plugins/after-run-api#Syntax
+      */ 
+      on('before:run', () => {
+        allResults = {}
+        num_specs = 0
+        console.log("======================= BEFORE RUN =============================")
+      })
+
+      on('after:spec', (spec, results) => {
+        console.log("======================= AFTER SPEC  ============================")
+        num_specs += 1
+        console.log(num_specs)
+        console.log(variavel.int)
+
+        allResults[spec.relative] = {}
+        const resposta = allResults[spec.relative]
+        total_specs = Object.keys(allResults)
+        results.tests.forEach((tst) => {
+          const testTitle = tst.title.join(' - ')
+          resposta[testTitle] = tst.state
         })
-      }
-    
-        on("task", {
-        enviaEmail() {
-          envia_emails()
-          return null
-        },
+        if(num_specs == 2) {
+          let hoje = new Date().toLocaleString()
+          envia_emails(hoje)
+        }
+      })
+        
+      
+      on("task", {
         log(message) {
           console.log(message)
           return null
-        },
+        }
       })
-      return config
     },
-
     env: { 
-      
       "HOST": "smtp.gmail.com",
       "PORT": "587",
       "FROM": "Luciano <luciano.testesqa@gmail.com>",
       "USER": "luciano.testesqa@gmail.com",
-      "PASSWORD": "#rufus2022",
-      "TESTEQA": "valor",
-      "EMAIL_TO": ["luciano.ivec@gmail.com","jef_shandler@msn.com","rufusQA@pm.me","luciano.testesqa@gmail.com"]
-      
-    }
-
-  },
-  component: {
+      "PASSWORD": "oitzqgwhcszamkpy",
+      "EMAIL_TO": ["rufusQA@pm.me","luciano.testesqa@gmail.com","jeferson.shandler@rufustec.com","luciano.santosgoncalves@rufustec.com"]
+      }
+    },
+    component: {
     specPattern: 'src/**/__tests__/*.{cy,spec}.{js,ts,jsx,tsx}',
     devServer: {
       framework: 'vue',

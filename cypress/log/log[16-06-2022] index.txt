@@ -1,0 +1,26 @@
+Execucao no navegador electron
+Total de suites: 2 
+Total de testes: 5.
+3 testes passaram, 1 teste falhou, 1 teste ficou pendente,  nenhum teste foi pulado  
+Testes executados em 7546 
+[16/06/2022 11:57:18] Entrou no getStatusEmoji
+Execucao no navegador electron
+Total de suites: 2 
+Total de testes: 5.
+3 testes passaram, 1 teste falhou, 1 teste ficou pendente,  nenhum teste foi pulado  
+Testes executados em 6974 
+[16/06/2022 11:58:41] Entrou no getStatusEmoji
+[16/06/2022 12:20:12] Entrou no getStatusEmoji
+[16/06/2022 12:33:55] Entrou no getStatusEmoji
+cypress\e2e\suite_adicional.cy.js<br>---------------------------------<br>✅ Pagina Login - Acesssar home novamente[16/06/2022 12:35:17] Entrou no getStatusEmoji
+cypress\e2e\suite_adicional.cy.js<br>---------------------------------<br>✅ Pagina Login - Acesssar home novamente[16/06/2022 14:13:51] Entrou no getStatusEmoji
+cypress\e2e\suite_adicional.cy.js<br>---------------------------------<br>✅ Pagina Login - Acesssar home novamente[16/06/2022 14:26:46] Entrou no getStatusEmoji
+[16/06/2022 14:27:53] Entrou no getStatusEmoji
+[16/06/2022 14:27:53] Entrou no getStatusEmoji
+[16/06/2022 14:27:53] Entrou no getStatusEmoji
+[16/06/2022 14:27:53] Entrou no getStatusEmoji
+[16/06/2022 14:27:54]  passou na conexao 1 
+[16/06/2022 14:28:00] Entrou no getStatusEmoji
+[16/06/2022 15:33:08]  passou na conexao 1 
+[16/06/2022 15:52:41]  passou na conexao 1 
+[16/06/2022 18:08:33]  passou na conexao 1 

@@ -8,10 +8,18 @@ describe("Pagina Login", () => {
     var data = '\[' + hoje + '\] teste executado\n'
     cy.writeFile(nomeArquivo, data,{ flag: 'a+' })
 
-    var rst = cy.url().should("be.equal", "http://localhost:3000/")
+    cy.url().should("be.equal", "http://localhost:3000/")
   })
 
-  it("Botão sign in é exibido", () => {
+  it("Botão sign in não encontrado", () => {
+    cy.contains('SignIn').should('exist')
+  })
+
+  it.skip("Teste pulado", () => {
+    cy.contains('Sign In').should('exist')
+  })
+  
+  it("Botão sign in encontrado", () => {
     cy.contains('Sign In').should('exist')
   })
 })
