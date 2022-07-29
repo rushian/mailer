@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Jul 29 18:52:55 BRT 2022","Fri Jul 29 18:52:57 BRT 2022","1196","","Pagina Login","","","","Acesssar homepage",""
+"failed","Fri Jul 29 18:52:57 BRT 2022","Fri Jul 29 18:53:01 BRT 2022","4662","","Pagina Login","","","","Botão sign in não encontrado",""
+"passed","Fri Jul 29 18:53:01 BRT 2022","Fri Jul 29 18:53:01 BRT 2022","63","","Pagina Login","","","","Botão sign in encontrado",""
+"skipped","Fri Jul 29 18:53:01 BRT 2022","Fri Jul 29 18:53:01 BRT 2022","4","","Pagina Login","","","","Teste pulado",""
+"passed","Fri Jul 29 18:53:05 BRT 2022","Fri Jul 29 18:53:06 BRT 2022","1128","","Login - testes adicionais","","","","Acesssar home novamente",""

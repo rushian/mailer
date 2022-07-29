@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 const { defineConfig } = require('cypress')
-
+const AllureWriter = require("@shelex/cypress-allure-plugin/writer");
 
 let allResults 
 let num_specs 
@@ -20,7 +20,7 @@ module.exports = defineConfig({
     specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
-
+      AllureWriter(on, config);
       envia_emails = function (hoje) {
           console.log("======================= ENTROU NA ENVIA-EMAILS  ============================")
           //instanciar nodemailer
@@ -157,6 +157,7 @@ module.exports = defineConfig({
       })
     },
     env: { 
+      allureResultsPath: "./allure-results",
       "HOST": "smtp.gmail.com",
       "PORT": "587",
       "FROM": "Luciano <luciano.testesqa@gmail.com>",

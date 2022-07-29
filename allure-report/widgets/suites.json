@@ -1,1 +1,1 @@
-{"total":0,"items":[]}
+{"total":2,"items":[{"uid":"d8e712301227ac15fee11df3a7a473ae","name":"Pagina Login","statistic":{"failed":1,"broken":0,"skipped":1,"passed":2,"unknown":0,"total":4}},{"uid":"c5e262c9deb96c5a14d721f49cb52106","name":"Login - testes adicionais","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
