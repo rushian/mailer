@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 const { defineConfig } = require('cypress')
+
+
 let allResults 
 let num_specs 
 
@@ -160,7 +162,7 @@ module.exports = defineConfig({
       "FROM": "Luciano <luciano.testesqa@gmail.com>",
       "USER": "luciano.testesqa@gmail.com",
       "PASSWORD": "oitzqgwhcszamkpy",
-      "EMAIL_TO": ["rufusQA@pm.me","luciano.testesqa@gmail.com","jeferson.shandler@rufustec.com","luciano.santosgoncalves@rufustec.com"]
+      "EMAIL_TO": ["jeferson.shandler@rufustec.com","luciano.ivec@gmail.com"]
       }
     },
     component: {
